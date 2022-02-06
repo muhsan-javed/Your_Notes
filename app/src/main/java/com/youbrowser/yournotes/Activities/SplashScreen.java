@@ -16,14 +16,11 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_srceen);
         getSupportActionBar().hide();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashScreen.this, MainActivity.class));
-                finish();
-            }
-        },2000);
+        // Splash Screen Time Code
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(SplashScreen.this, MainActivity.class));
+            finish();
+        }, 2000);
 
     }
 }

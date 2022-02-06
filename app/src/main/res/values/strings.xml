@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Your Notes</string>
+    <string name="no_filter">No Filter</string>
+    <string name="high_to_low">High to low</string>
+    <string name="low_to_high">low to High</string>
+
+    <string name="aboutImage">This image i can used icon or imageView etc... </string>
+    <string name="title">Title...</string>
+    <string name="notes">Notes</string>
+    <string name="sub_title">Sub Title</string>
+    <string name="priority">Priority</string>
+    <string name="splash_notes_app">Notes App</string>
 </resources>

@@ -3,12 +3,10 @@ package com.youbrowser.yournotes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
@@ -34,88 +32,78 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        // GET Views
         notesViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
-
+        // noFilter Icon Set
         binding.noFilter.setBackgroundResource(R.drawable.filter_selected_shape);
-
+        // noFilter TextView-> setOnclickListener
         binding.noFilter.setOnClickListener(view -> {
             loadData(0);
             binding.highToLow.setBackgroundResource(R.drawable.filter_nu_shape);
             binding.lowToHigh.setBackgroundResource(R.drawable.filter_nu_shape);
             binding.noFilter.setBackgroundResource(R.drawable.filter_selected_shape);
         });
-
+        // HighToLow TextView-> setOnclickListener
         binding.highToLow.setOnClickListener(view -> {
             loadData(1);
             binding.noFilter.setBackgroundResource(R.drawable.filter_nu_shape);
             binding.lowToHigh.setBackgroundResource(R.drawable.filter_nu_shape);
             binding.highToLow.setBackgroundResource(R.drawable.filter_selected_shape);
         });
-
+        // lowToHigh TextView-> setOnclickListener
         binding.lowToHigh.setOnClickListener(view -> {
             loadData(2);
             binding.noFilter.setBackgroundResource(R.drawable.filter_nu_shape);
             binding.lowToHigh.setBackgroundResource(R.drawable.filter_nu_shape);
             binding.lowToHigh.setBackgroundResource(R.drawable.filter_selected_shape);
         });
-
+        // NewNotesButton GO To Next Activity
         binding.newNotesBtn.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), InsertNotesActivity.class)));
-
 //        notesViewModel.getAllNotes.observe(this, notes -> {
-//
 //            binding.notesRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
 //            adapter = new NotesAdapter(MainActivity.this, notes);
 //            binding.notesRecyclerView.setAdapter(adapter);
 //        });
-
+        // GETing Notes
         notesViewModel.getAllNotes.observe(this, new Observer<List<Notes>>() {
             @Override
             public void onChanged(List<Notes> notes) {
                 setAdapter(notes);
-                filterNotesAllLists = notes;
-
+                filterNotesAllLists = notes; // Filtering
             }
         });
-
     }
 
-    public void setAdapter(List<Notes> notes){
+    // setAdapter and set Layout or setRecycler a adapter
+    public void setAdapter(List<Notes> notes) {
         binding.notesRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         adapter = new NotesAdapter(MainActivity.this, notes);
         binding.notesRecyclerView.setAdapter(adapter);
     }
 
-    private void loadData(int i){
-        if (i == 0){
-            notesViewModel.getAllNotes.observe(this, new Observer<List<Notes>>() {
-                @Override
-                public void onChanged(List<Notes> notes) {
-                    setAdapter(notes);
-                    filterNotesAllLists = notes;
-                }
+    // This Function checking filter
+    private void loadData(int i) {
+        if (i == 0) {
+            notesViewModel.getAllNotes.observe(this, notes -> {
+                setAdapter(notes);
+                filterNotesAllLists = notes;
             });
-        }else if(i == 1){
-            notesViewModel.highToLow.observe(this, new Observer<List<Notes>>() {
-                @Override
-                public void onChanged(List<Notes> notes) {
-                    setAdapter(notes);
-                    filterNotesAllLists = notes;
+        } else if (i == 1) {
+            notesViewModel.highToLow.observe(this, notes -> {
+                setAdapter(notes);
+                filterNotesAllLists = notes;
 
-                }
             });
-        }else if (i == 2){
-            notesViewModel.lowToHigh.observe(this, new Observer<List<Notes>>() {
-                @Override
-                public void onChanged(List<Notes> notes) {
-                    setAdapter(notes);
-                    filterNotesAllLists = notes;
+        } else if (i == 2) {
+            notesViewModel.lowToHigh.observe(this, notes -> {
+                setAdapter(notes);
+                filterNotesAllLists = notes;
 
-                }
             });
         }
     }
 
+    // Add SearchView Methods or add menu Bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_notes, menu);
@@ -135,21 +123,19 @@ public class MainActivity extends AppCompatActivity {
                 NotesFilter(newText);
                 return false;
             }
-
         });
-
         return super.onCreateOptionsMenu(menu);
     }
-    private void NotesFilter(String newText) {
-       // Log.e("@@@@@", "NotesFilter: "+ newText);
 
+    // Filter SearchView
+    private void NotesFilter(String newText) {
+        // Log.e("@@@@@", "NotesFilter: "+ newText);
         ArrayList<Notes> FilterName = new ArrayList<>();
-        for (Notes notes :this.filterNotesAllLists){
-            if (notes.notesTitle.contains(newText) || notes.notesStubTitle.contains(newText)){
+        for (Notes notes : this.filterNotesAllLists) {
+            if (notes.notesTitle.contains(newText) || notes.notesStubTitle.contains(newText)) {
                 FilterName.add(notes);
             }
         }
-
         this.adapter.searchNotes(FilterName);
     }
 }

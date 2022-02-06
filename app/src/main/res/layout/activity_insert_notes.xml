@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/backgroundColor"
+    android:orientation="vertical"
     tools:context=".Activities.InsertNotesActivity">
 
     <LinearLayout
@@ -15,34 +13,36 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/notesTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:hint="Title..."
-            android:padding="15dp"
-            android:background="@drawable/edit_text_bg"
-            android:fontFamily="@font/opensans"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:id="@+id/notesTitle"
-            />
+            android:autofillHints=""
+            android:background="@drawable/edit_text_bg"
+            android:fontFamily="@font/opensans"
+            android:hint="@string/title"
+            android:inputType="text"
+            android:padding="15dp" />
 
         <EditText
+            android:id="@+id/notesSubTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:hint="Sub Title"
-            android:padding="15dp"
-            android:background="@drawable/edit_text_bg"
-            android:fontFamily="@font/opensans"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:id="@+id/notesSubTitle"
-            />
+            android:background="@drawable/edit_text_bg"
+            android:fontFamily="@font/opensans"
+            android:hint="@string/sub_title"
+            android:inputType="text"
+            android:padding="15dp"
+            tools:ignore="Autofill" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,14 +57,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Priority"
-                android:fontFamily="@font/opensans"
-                android:textColor="@color/black"
-                android:textSize="18sp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                />
+                android:fontFamily="@font/opensans"
+                android:text="@string/priority"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/redPriority"
@@ -72,7 +71,7 @@
                 android:layout_height="25dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/red_shape"
-                />
+                android:contentDescription="@string/aboutImage" />
 
             <ImageView
                 android:id="@+id/greenPriority"
@@ -80,7 +79,7 @@
                 android:layout_height="25dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/green_shape"
-                />
+                android:contentDescription="@string/aboutImage" />
 
             <ImageView
                 android:id="@+id/yellowPriority"
@@ -88,38 +87,39 @@
                 android:layout_height="25dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/yellow"
-                />
+                android:contentDescription="@string/aboutImage" />
 
         </LinearLayout>
 
         <EditText
+            android:id="@+id/notesData"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:hint="Notes"
-            android:gravity="start"
-            android:padding="15dp"
-            android:background="@drawable/edit_text_bg"
-            android:fontFamily="@font/opensans"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:id="@+id/notesData"
-            />
+            android:background="@drawable/edit_text_bg"
+            android:fontFamily="@font/opensans"
+            android:gravity="start"
+            android:hint="@string/notes"
+            android:inputType="textMultiLine"
+            android:padding="15dp"
+            tools:ignore="Autofill" />
     </LinearLayout>
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/doneNotesBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="26dp"
         android:backgroundTint="@color/red"
-        android:id="@+id/doneNotesBtn"
+        android:contentDescription="@string/aboutImage"
         android:src="@drawable/ic_baseline_done_24"
-        android:contentDescription="about"
-        android:layout_alignParentEnd="true" />
+        tools:ignore="UnusedAttribute" />
 
 </RelativeLayout>

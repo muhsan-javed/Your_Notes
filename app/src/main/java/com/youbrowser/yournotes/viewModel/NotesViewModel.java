@@ -31,15 +31,15 @@ public class NotesViewModel extends AndroidViewModel {
         lowToHigh = repository.lowToHigh;
     }
 
-    public void insertNote(Notes notes){
+    public void insertNote(Notes notes) {
         repository.insertNotes(notes);
     }
 
-    public void deleteNote(int id){
+    public void deleteNote(int id) {
         repository.deleteNotes(id);
     }
 
-    public void updateNote(Notes notes){
+    public void updateNote(Notes notes) {
         repository.updateNotes(notes);
     }
 }
